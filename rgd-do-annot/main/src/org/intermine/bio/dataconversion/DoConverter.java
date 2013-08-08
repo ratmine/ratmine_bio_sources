@@ -86,7 +86,7 @@ public class DoConverter extends BioFileConverter
 
         // only construct factory here so can be replaced by mock factory in tests
         flybaseResolverFactory = new FlyBaseIdResolverFactory("gene");
-        ontologyResolverFactory = new OntologyIdResolverFactory("CTD");
+        ontologyResolverFactory = new OntologyIdResolverFactory("RDO");
 
         readConfig();
     }
@@ -94,6 +94,7 @@ public class DoConverter extends BioFileConverter
     static {
         WITH_TYPES.put("FB", "Gene");
         WITH_TYPES.put("UniProt", "Protein");
+        //GENE_PREFIXES.put("10116", "RGD:");
     }
 
     // read config file that has specific settings for each organism, key is taxon id
@@ -175,6 +176,12 @@ public class DoConverter extends BioFileConverter
             }
             int readColumn = config.readColumn();
             String productId = array[readColumn];
+		
+		// Pushkala addition to add RGD prefix to Identifiers
+		String tempProductId = productId;
+		if(readColumn==1 && (!(tempProductId.contains("RGD:")))){
+			productId = "RGD:"+tempProductId;
+		}
 
             String goId = array[4];
             String qualifier = array[3];

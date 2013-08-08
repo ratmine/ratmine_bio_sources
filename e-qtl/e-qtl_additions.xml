@@ -4,6 +4,9 @@
 <classes>
 	<class name="Submission" is-interface="true">
 		<collection name="dataPoints" referenced-type="DataPoint" reverse-reference="submission"/>
+		<attribute name="experimentDate" type="java.util.Date"/>
+		<reference name="publication" referenced-type="Publication"/>
+		<attribute name="title" type="java.lang.String"/>
 	</class>
 	
 	<class name="DataPoint" is-interface="true">
@@ -33,6 +36,12 @@
 	<class name="SimpleSequenceLengthVariation" is-interface="true">
 		<collection name="eqtls" referenced-type="eQTL" reverse-reference="sslv"/>
 	</class>
-	
+
+	<class name="Project" is-interface="true">
+		<attribute name="name" type="java.lang.String"/>
+		<attribute name="namePI" type="java.lang.String"/>
+		<attribute name="surnamePI" type="java.lang.String"/>
+		<collection name="submissions" referenced-type="Submission"/>
+	</class>	
 	
 </classes>

@@ -8,6 +8,14 @@
 		<reference name="mRNA" referenced-type="MRNA" />
 	</class>
 
+	<class name="FivePrimeUTR" is-interface="true">
+                <reference name="mRNA" referenced-type="MRNA" />
+        </class>
+
+	<class name="ThreePrimeUTR" is-interface="true">
+                <reference name="mRNA" referenced-type="MRNA" />
+        </class>
+
 	<class name="Congenic" extends="Assembly" is-interface="true"/>
 	
 </classes>

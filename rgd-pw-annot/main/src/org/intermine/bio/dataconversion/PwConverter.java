@@ -94,6 +94,7 @@ public class PwConverter extends BioFileConverter
     static {
         WITH_TYPES.put("FB", "Gene");
         WITH_TYPES.put("UniProt", "Protein");
+        //GENE_PREFIXES.put("10116", "RGD:");
     }
 
     // read config file that has specific settings for each organism, key is taxon id
@@ -175,6 +176,14 @@ public class PwConverter extends BioFileConverter
             }
             int readColumn = config.readColumn();
             String productId = array[readColumn];
+
+		 // Pushkala addition to add RGD prefix to Identifiers
+                String tempProductId = productId;
+                if(readColumn==1 && (!(tempProductId.contains("RGD:")))){
+                        productId = "RGD:"+tempProductId;
+                }
+
+
 
             String goId = array[4];
             String qualifier = array[3];

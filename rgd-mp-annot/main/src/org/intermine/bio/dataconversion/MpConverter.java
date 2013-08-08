@@ -176,6 +176,14 @@ public class MpConverter extends BioFileConverter
             int readColumn = config.readColumn();
             String productId = array[readColumn];
 
+
+		 // Pushkala addition to add RGD prefix to Identifiers
+                String tempProductId = productId;
+                if(readColumn==1 && (!(tempProductId.contains("RGD:")))){
+                        productId = "RGD:"+tempProductId;
+                }
+
+
             String goId = array[4];
             String qualifier = array[3];
             String strEvidence = array[6];

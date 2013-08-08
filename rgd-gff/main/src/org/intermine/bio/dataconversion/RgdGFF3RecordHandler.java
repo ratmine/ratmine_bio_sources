@@ -38,9 +38,11 @@ public class RgdGFF3RecordHandler extends GFF3RecordHandler
 		super(tgtModel);
 		 // create a map of classname to reference name for parent references
         refsAndCollections = new HashMap<String, String>();
-        refsAndCollections.put("Exon", "gene");
+        refsAndCollections.put("Exon", "transcript");
+	refsAndCollections.put("FivePrimeUTR", "transcript");
         refsAndCollections.put("CDS", "transcript");
-		refsAndCollections.put("MRNA", "gene");
+	refsAndCollections.put("ThreePrimeUTR", "transcript");
+	refsAndCollections.put("mRNA", "gene");
 		
 		//Map<String, Item> featuresMap = new HashMap<String, Item>();
     }
@@ -59,12 +61,12 @@ public class RgdGFF3RecordHandler extends GFF3RecordHandler
 			return;
 		}
 		String ftrName = feature.getAttribute("primaryIdentifier").getValue();
-		Matcher matcher = Pattern.compile("RGD").matcher(ftrName);
-		String newName = matcher.replaceAll("");
+		//Matcher matcher = Pattern.compile("RGD").matcher(ftrName);
+		//String newName = matcher.replaceAll("");
 
-		if (featuresMap.get(newName) == null) {
+		if (featuresMap.get(ftrName) == null) {
 		    // new feature
-			featuresMap.put(newName, feature);
+			featuresMap.put(ftrName, feature);
 		} else {
 		    // we've already seen this feature
 
@@ -72,7 +74,7 @@ public class RgdGFF3RecordHandler extends GFF3RecordHandler
             removeFeature();
 
 		    // reset the feature we're referring to to be the original feature item
-            feature = featuresMap.get(newName);
+            feature = featuresMap.get(ftrName);
 		}
 
         // location refers to feature object - either new feature or original one retrieved from map
