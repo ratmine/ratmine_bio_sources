@@ -1,0 +1,7 @@
+<project name="rgd-uberon-ont" default="default" basedir=".">
+  <description>build, test, package uberon-ont</description>
+  
+  <import file="../../../imbuild/source.xml"/>
+  
+</project>
+
